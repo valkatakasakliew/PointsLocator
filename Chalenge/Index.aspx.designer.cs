@@ -22,40 +22,22 @@ namespace Chalenge {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// chbxGenderAll control.
+        /// chbxListGenders control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chbxGenderAll;
+        protected global::System.Web.UI.WebControls.CheckBoxList chbxListGenders;
         
         /// <summary>
-        /// chbxMale control.
+        /// odsGender control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chbxMale;
-        
-        /// <summary>
-        /// chbxFemale control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chbxFemale;
-        
-        /// <summary>
-        /// chbxUnknown control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chbxUnknown;
+        protected global::System.Web.UI.WebControls.ObjectDataSource odsGender;
         
         /// <summary>
         /// chbxListAges control.

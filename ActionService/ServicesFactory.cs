@@ -18,11 +18,6 @@ namespace ActionService
             return new TrafficService();
         }
 
-        public static ICustomerTrafficService CreateCustomerTrafficService()
-        {
-            return new CustomerTrafficService();
-        }
-
         public static IPointService CreatePointService()
         {
             return new PointService();

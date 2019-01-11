@@ -10,6 +10,6 @@ namespace ActionService
 {
     public interface IPointService
     {
-        List<Point> GetListOfPoints(List<YearsRangeFilterItem> ageFilters);
+        List<Point> GetListOfPoints(List<YearsRangeFilterItem> ageFilters,List<GenderFilterItem> genderFilters);
     }
 }

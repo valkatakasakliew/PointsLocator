@@ -43,9 +43,14 @@
   <ItemGroup>
     <Compile Include="BusinessObject.cs" />
     <Compile Include="Customer.cs" />
-    <Compile Include="CustomerTraffic.cs" />
-    <Compile Include="Filters\GenderFilters.cs" />
+    <Compile Include="Filters\BaseFilter.cs" />
+    <Compile Include="Filters\Enumerators.cs" />
+    <Compile Include="Filters\FilterObject.cs" />
+    <Compile Include="Filters\GenderFilter.cs" />
+    <Compile Include="Filters\GenderFilterItem.cs" />
+    <Compile Include="Filters\IFIterItem.cs" />
     <Compile Include="Filters\YearsRangeFilter.cs" />
+    <Compile Include="Filters\YearsRangeFilterItem.cs" />
     <Compile Include="Point.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Traffic.cs" />

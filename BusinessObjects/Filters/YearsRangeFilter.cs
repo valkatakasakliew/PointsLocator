@@ -3,67 +3,37 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static BusinessObjects.Filters.Enumerators;
 
 namespace BusinessObjects.Filters
 {
+    public class YearsRangeFilter : BaseFilter
+    {
+
+        //static List<YearsRangeFilterItem> _filterItems;
 
 
-        public class YearsRangeFilter
+        public YearsRangeFilter()
         {
-
-            static List<YearsRangeFilterItem> filterItems;
-
-
-            public YearsRangeFilter()
-            {
-                filterItems = new List<YearsRangeFilterItem>();
-                filterItems.Add(new YearsRangeFilterItem(YearsRangeFilterEnum.ToEighteen, 1, 18, "1-18"));
-                filterItems.Add(new YearsRangeFilterItem(YearsRangeFilterEnum.NineteenTwentyFive, 19, 25, "19-25"));
-                filterItems.Add(new YearsRangeFilterItem(YearsRangeFilterEnum.TwentySixThirtyFive, 26, 35, "26-35"));
-                filterItems.Add(new YearsRangeFilterItem(YearsRangeFilterEnum.ThirtySixFourtyFive, 36, 45, "36-45"));
-                filterItems.Add(new YearsRangeFilterItem(YearsRangeFilterEnum.FourtySixSixtyFive, 46, 65, "46-65"));
-                filterItems.Add(new YearsRangeFilterItem(YearsRangeFilterEnum.OverSixstySix, 66, 100, "65+"));
-            }
-
-            public List<YearsRangeFilterItem> GetYearsRangeItems()
-            {
-                return filterItems;
-
-            }
-
-            public static YearsRangeFilterItem GetFilter(YearsRangeFilterEnum filterEnum)
-            {
-                return filterItems.FirstOrDefault(f => f.YearsRangeFilterType.Equals(filterEnum));
-            }
+            _filterItems = new List<IFilterItem>();
+            _filterItems.Add(new YearsRangeFilterItem("ToEighteen", new AgeFilterObject(1, 18), "1-18"));
+            _filterItems.Add(new YearsRangeFilterItem("NineteenTwentyFive", new AgeFilterObject(19, 25), "19-25"));
+            _filterItems.Add(new YearsRangeFilterItem("TwentySixThirtyFive", new AgeFilterObject(26, 35), "26-35"));
+            _filterItems.Add(new YearsRangeFilterItem("ThirtySixFourtyFive", new AgeFilterObject(36, 45), "36-45"));
+            _filterItems.Add(new YearsRangeFilterItem("FourtySixSixtyFive", new AgeFilterObject(46, 65), "46-65"));
+            _filterItems.Add(new YearsRangeFilterItem("OverSixstySix", new AgeFilterObject(66, 100), "65+"));
         }
 
-
-
-        public class YearsRangeFilterItem
+        public override List<IFilterItem> GetFilterItems()
         {
-            public YearsRangeFilterEnum YearsRangeFilterType { get; set; }
-            public int FromValue { get; set; }
-            public int ToValue { get; set; }
-            public string Description { get; set; }
+            return _filterItems;
 
-            public YearsRangeFilterItem(YearsRangeFilterEnum type, int from, int to, string description)
-            {
-                YearsRangeFilterType = type;
-                FromValue = from;
-                ToValue = to;
-                Description = description;
-            }
         }
 
-        public enum YearsRangeFilterEnum
+        public override IFilterItem GetFilterItem(string filterType)
         {
-            ToEighteen,
-            NineteenTwentyFive,
-            TwentySixThirtyFive,
-            ThirtySixFourtyFive,
-            FourtySixSixtyFive,
-            OverSixstySix
+            return _filterItems.FirstOrDefault(f =>f.FilterName== filterType);
         }
-
     }
+}
 

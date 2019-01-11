@@ -10,6 +10,6 @@ namespace DataObjects.Interfaces
 {
     public interface IPointDao
     {
-        List<Point> GetPoints(List<YearsRangeFilterItem> ageFilters);
+        List<Point> GetPoints(List<YearsRangeFilterItem> ageFilters, List<GenderFilterItem> genderFilters);
     }
 }

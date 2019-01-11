@@ -10,5 +10,6 @@ namespace ActionService.Repositories
     {
         ICustomerRepository GetCustomerRepository { get; }
         ITrafficRepository GetTrafficRepository { get; }
+        IPointRepository GetPointRepository { get; }
     }
 }

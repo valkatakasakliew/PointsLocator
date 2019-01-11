@@ -1,13 +1,12 @@
 ﻿using ActionService;
 using BusinessObjects;
 using Helping.Generators.Implementations;
-using MongoDB.Bson;
+using Microsoft.SqlServer.Management.Common;
+using Microsoft.SqlServer.Management.Smo;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web.Script.Serialization;
+using System.Data.SqlClient;
+using System.IO;
 
 namespace InsertingData
 {
@@ -15,8 +14,35 @@ namespace InsertingData
     {
         static void Main(string[] args)
         {
+            // this will create DB objects
+            CreateObjectsInDB();
 
+            //Inserting data to DB
+            InsertDataIntoCustomerAndTrafficTables(500, 100000);
 
+        }
+
+        /// <summary>
+        /// Create object in DB
+        /// </summary>
+        private static void CreateObjectsInDB()
+        {
+            string sqlConnectionString = "Persist Security Info=False;Integrated Security=true;Initial Catalog=SMART_CITIES;server=.";
+            string path = Path.Combine(Environment.CurrentDirectory, @"StartScripts.sql");
+            string script = File.ReadAllText(path);
+
+            SqlConnection conn = new SqlConnection(sqlConnectionString);
+            Server server = new Server(new ServerConnection(conn));
+            server.ConnectionContext.ExecuteNonQuery(script);
+        }
+
+        /// <summary>
+        /// Inserting data to Customer and Traffic tables
+        /// </summary>
+        /// <param name="pointsCount">How many point there will be</param>
+        /// <param name="customersCount">How many costumers there will be ( will have 5 traffic per customer ) </param>
+        private static void InsertDataIntoCustomerAndTrafficTables(int pointsCount,int customersCount)
+        {
             ITrafficService trafficService = ServicesFactory.CreateTrafficServcie();
             ICustomerService customerService = ServicesFactory.CreateCustomerService();
 
@@ -26,12 +52,12 @@ namespace InsertingData
 
             List<Coordinates> coorList = new List<Coordinates>();
 
-            for (int p = 0; p < 500; p++)
+            for (int p = 0; p < pointsCount; p++)
             {
-                coorList.Add(new Coordinates(new DecimalGenerator(48.1395m, 48.1693m).Generate(), new DecimalGenerator(17.0586m, 17.1730m).Generate() ));
+                coorList.Add(new Coordinates(new DecimalGenerator(48.1395m, 48.1693m).Generate(), new DecimalGenerator(17.0586m, 17.1730m).Generate()));
             }
 
-            for (int c = 0; c < 2000000; c++)
+            for (int c = 0; c < customersCount; c++)
             {
                 Console.WriteLine("------------------------------------------------------");
                 string aNumber = new PhoneNumberGenerator().Generate();
@@ -70,65 +96,32 @@ namespace InsertingData
             }
 
             Console.WriteLine("Operation successfuly");
-
-            //  Console.WriteLine(new DecimalGenerator(17.0586m, 17.1730m).Generate());
-
-            //List<CustomerTraffic> listT = new List<CustomerTraffic>();
-
-            //for (int t = 0; t < 500000; t++)
-            //{
-            //    listT.Add(new CustomerTraffic()
-            //    {
-            //        Number = new PhoneNumberGenerator().Generate(),
-            //        Age = new IntegerGenerator(0, 100).Generate(),
-            //        CellLat = new DecimalGenerator(48.1395m, 48.1693m).Generate(),
-            //        CellLong = new DecimalGenerator(17.0586m, 17.1730m).Generate(),
-            //        Gender = new FromListGetSingleGenerator<string>(genders).Generate()
-            //    });
-            //}
-
-            //Stopwatch stopWatch = new Stopwatch();
-            //stopWatch.Start();
-
-            //var json = GetMarkers(listT);
-
-            //stopWatch.Stop();
-
-            //TimeSpan ts = stopWatch.Elapsed;
-
-            //Console.WriteLine("GetMarkers time execution"+ String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
-            //                                                ts.Hours, ts.Minutes, ts.Seconds,
-            //                                                ts.Milliseconds / 10));
-
-            //stopWatch = new Stopwatch();
-            //stopWatch.Start();
-
-            //var newJson = Newtonsoft.Json.JsonConvert.SerializeObject(listT);
-
-            //stopWatch.Stop();
-
-            //ts = stopWatch.Elapsed;
-
-            //Console.WriteLine("ToJson time execution" + String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
-            //                                                ts.Hours, ts.Minutes, ts.Seconds,
-            //                                                ts.Milliseconds / 10));
-
-            //var obj = Newtonsoft.Json.JsonConvert.SerializeObject(listT);
-            //Console.WriteLine(obj);
-
-            //ICustomerTrafficService ctService = ServicesFactory.CreateCustomerTrafficService();
-            //var l = ctService.GetListOfCustomerTraffics();
-
         }
+        
+        /// <summary>
+        /// Helping to create coordinate for points
+        /// </summary>
         class Coordinates
         {
+            /// <summary>
+            /// Latitude
+            /// </summary>
             public decimal Lat { get; set; }
+           
+            /// <summary>
+            /// Longitude
+            /// </summary>
             public decimal Long { get; set; }
 
-            public Coordinates(decimal latitude, decimal longtitude)
+            /// <summary>
+            /// Create coordinate by latitude and longitude
+            /// </summary>
+            /// <param name="latitude"></param>
+            /// <param name="longitude"></param>
+            public Coordinates(decimal latitude, decimal longitude)
             {
                 Lat = latitude;
-                Long = longtitude;
+                Long = longitude;
             }
         }
     }

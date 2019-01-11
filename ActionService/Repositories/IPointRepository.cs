@@ -10,6 +10,6 @@ namespace ActionService.Repositories
 {
     public interface IPointRepository
     {
-        List<Point> GetPoints(List<YearsRangeFilterItem> ageFilters);
+        List<Point> GetPoints(List<YearsRangeFilterItem> ageFilters, List<GenderFilterItem> genderFilters);
     }
 }

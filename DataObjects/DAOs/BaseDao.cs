@@ -11,6 +11,6 @@ namespace DataObjects.DAOs
     public abstract class BaseDao
     {
         protected readonly Db db = new Db("SmartCitiesConn");
-
+       
     }
 }

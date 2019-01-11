@@ -42,19 +42,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomerService.cs" />
-    <Compile Include="CustomerTrafficService.cs" />
     <Compile Include="ICustomerService.cs" />
-    <Compile Include="ICustomerTrafficService.cs" />
     <Compile Include="IPointService.cs" />
     <Compile Include="ITrafficService.cs" />
     <Compile Include="PointService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\CustomerRepository.cs" />
-    <Compile Include="Repositories\CustomerTrafficRepository.cs" />
     <Compile Include="Repositories\ICustomerRepository.cs" />
-    <Compile Include="Repositories\ICustomerTrafficRepository.cs" />
     <Compile Include="Repositories\IPointRepository.cs" />
-    <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Repositories\IRepositoryFactory.cs" />
     <Compile Include="Repositories\ITrafficRepository.cs" />
     <Compile Include="Repositories\PointRepository.cs" />

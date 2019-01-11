@@ -6,27 +6,53 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataObjects.DAOs
 {
     public class PointDao : BaseDao, IPointDao
     {
-        public List<Point> GetPoints(List<YearsRangeFilterItem> ageFilters)
+        /// <summary>
+        /// Get points 
+        /// </summary>
+        /// <param name="ageFilters">filtered by Age</param>
+        /// <returns></returns>
+        public List<Point> GetPoints(List<YearsRangeFilterItem> ageFilters, List<GenderFilterItem> genderFilters)
         {
             string procedure = "GetPointData";
+            ageFilters = new List<YearsRangeFilterItem>() { new YearsRangeFilterItem("test",new AgeFilterObject(1,18),"test")};
+            genderFilters = new List<GenderFilterItem>();
+            IEnumerable<AgeFilter> listAgeFilters = ageFilters.Select(x => new AgeFilter(x));
+            IEnumerable<GFilter> listGenderFilters = genderFilters.Select(x => new GFilter(x));
 
-            var l = ageFilters.Select(x => new AgeFilter(x.FromValue, x.ToValue));
-            DataTable dataTable = new DataTable();
-            SqlParameter sqlParameter = new SqlParameter("@AgeFilter", CreateDataTable(ageFilters));
-            sqlParameter.SqlDbType = SqlDbType.Structured;
-            sqlParameter.TypeName = "AgeFilterType";
+            DataTable dtAge = new DataTable();
+            dtAge.Columns.Add("FromAge", typeof(int));
+            dtAge.Columns.Add("ToAge", typeof(int));
+            listAgeFilters.ToList().ForEach(x => dtAge.Rows.Add(x.FromAge, x.ToAge));
+            SqlParameter ageParameter = new SqlParameter("@AgeFilter",SqlDbType.Structured);
+            ageParameter.SqlValue = dtAge;
+            ageParameter.TypeName = "AgeFilterType";
+
+            DataTable dtGender = new DataTable();
+            dtGender.Columns.Add("Gender", typeof(string));
+            dtGender.Rows.Add(listGenderFilters);
+            SqlParameter gParameter = new SqlParameter("@GenderFilter", dtGender);
+            gParameter.SqlDbType = SqlDbType.Structured;
+            gParameter.TypeName = "GenderFilterType";
+
+            var parms = new SqlParameter[]
+            {
+                ageParameter,
+                gParameter
+            };
 
 
-            return db.ReadStored(procedure, Make, sqlParameter).ToList();
+            return db.ReadStored(procedure, Make, parms).ToList();
         }
 
+        /// <summary>
+        ///  Extracts data from the datareader and adds 
+        ///  these to the properties of the Point business object
+        /// </summary>
         static readonly Func<IDataReader, Point> Make = reader =>
          new Point
          {
@@ -43,16 +69,5 @@ namespace DataObjects.DAOs
              SumOverSixstySix = reader["SumOverSixstySix"].AsInt()
          };
 
-        private static DataTable CreateDataTable(IEnumerable<YearsRangeFilterItem> filterItems)
-        {
-            DataTable table = new DataTable();
-            table.Columns.Add("FromAge", typeof(int));
-            table.Columns.Add("ToAge", typeof(int));
-            foreach (YearsRangeFilterItem filterItem in filterItems)
-            {
-                table.Rows.Add(filterItem.FromValue,filterItem.ToValue);
-            }
-            return table;
-        }
     }
 }

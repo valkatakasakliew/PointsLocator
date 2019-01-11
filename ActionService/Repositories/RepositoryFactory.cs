@@ -12,8 +12,6 @@ namespace ActionService.Repositories
 
         public static ITrafficRepository GetTrafficRepository { get { return new TrafficRepository(); } }
 
-        public static ICustomerTrafficRepository GetCustomerTrafficRepository { get { return new CustomerTrafficRepository(); } }
-
         public static IPointRepository GetPointRepository { get { return new PointRepository(); } }
     }
 }

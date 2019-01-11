@@ -12,27 +12,27 @@ namespace DataObjects.DAOs
 {
     public class CustomerDao : BaseDao,ICustomerDao
     {
-        //static Db db= new Db("SmartCitiesConn");
-
+        /// <summary>
+        /// Get all customers
+        /// </summary>
+        /// <returns></returns>
         public List<Customer> GetCustomers()
         {
-            string sql = 
-                @"select Number , Gender, Age 
-                from [Customer]";
-            return db.Read<Customer>(sql,Make).ToList();
+            string procName = "GetCustomers";
+
+            return db.Read<Customer>(procName,Make).ToList();
         }
 
+        /// <summary>
+        /// Get customers by gender
+        /// </summary>
+        /// <param name="gender"></param>
+        /// <returns></returns>
         public List<Customer> GetCustomersByGender(string gender)
         {
-            string sql =
-                @"select Number , Gender, Age 
-                from [Customer]
-                where Gender=@Gender";
-            object[] parametres = new object[]
-            {
-                "@Gender",gender
-            };
-            return db.Read<Customer>(sql, Make,parametres).ToList();
+            string procName ="GetCustomerByGender";
+            
+            return db.ReadStored<Customer>(procName, Make,new SqlParameter("@gender",gender)).ToList();
         }
 
         public void InsertCustomer(Customer customer)

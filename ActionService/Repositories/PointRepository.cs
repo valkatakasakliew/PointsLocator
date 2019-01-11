@@ -14,9 +14,9 @@ namespace ActionService.Repositories
     {
         static readonly IPointDao pointDao = DaoFactory.GetPointDao;
 
-        public List<Point> GetPoints(List<YearsRangeFilterItem> ageFilters)
+        public List<Point> GetPoints(List<YearsRangeFilterItem> ageFilters, List<GenderFilterItem> genderFilters)
         {
-            return pointDao.GetPoints(ageFilters);
+            return pointDao.GetPoints(ageFilters,genderFilters);
         }
     }
 }

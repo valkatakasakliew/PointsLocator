@@ -19,10 +19,17 @@
         <div id="map" style="width: 1024px; height: 768px"></div>
 
         <fieldset title="Gender">
-            <asp:CheckBox ID="chbxGenderAll" runat="server" Text="Sellect / Unsellect All" />
-            <asp:CheckBox ID="chbxMale" runat="server" Text="Male" />
-            <asp:CheckBox ID="chbxFemale" runat="server" Text="Female" />
-            <asp:CheckBox ID="chbxUnknown" runat="server" Text="Unknown" />
+            <asp:CheckBoxList
+                ID="chbxListGenders"
+                runat="server"
+                DataSourceID="odsYearsRange"
+                OnSelectedIndexChanged="chbxListGenders_SelectedIndexChanged"
+                AutoPostBack="true"
+                DataTextField="FilterText"
+                DataValueField="FilterName">
+            </asp:CheckBoxList>
+                <asp:ObjectDataSource runat="Server" ID="odsGender"
+                SelectMethod="GetFilterItems" TypeName="BusinessObjects.Filters.GenderFilter"></asp:ObjectDataSource>
         </fieldset>
         <fieldset title="Ages">
             <asp:CheckBoxList
@@ -31,11 +38,11 @@
                 DataSourceID="odsYearsRange"
                 OnSelectedIndexChanged="ChbxListAges_SelectedIndexChanged"
                 AutoPostBack="true"
-                DataTextField="RangeText"
-                DataValueField="YearRange">
+                DataTextField="FilterText"
+                DataValueField="FilterName">
             </asp:CheckBoxList>
             <asp:ObjectDataSource runat="Server" ID="odsYearsRange"
-                SelectMethod="GetYearsRangeItems" TypeName="BusinessObjects.Filters.YearsRangeFilter"></asp:ObjectDataSource>
+                SelectMethod="GetFilterItems" TypeName="BusinessObjects.Filters.YearsRangeFilter"></asp:ObjectDataSource>
         </fieldset>
 
          <script src="Scripts/leafletMap.js"></script>

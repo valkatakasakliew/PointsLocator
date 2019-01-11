@@ -45,14 +45,13 @@
     <Compile Include="AgeFilter.cs" />
     <Compile Include="DAOs\BaseDao.cs" />
     <Compile Include="DAOs\CustomerDao.cs" />
-    <Compile Include="DAOs\CustomerTrafficDao.cs" />
     <Compile Include="DAOs\DaoFactory.cs" />
     <Compile Include="DAOs\PointDao.cs" />
     <Compile Include="DAOs\TrafficDao.cs" />
     <Compile Include="Db.cs" />
     <Compile Include="Extensions.cs" />
+    <Compile Include="GFilter.cs" />
     <Compile Include="Interfaces\ICustomerDao.cs" />
-    <Compile Include="Interfaces\ICustomerTrafficDao.cs" />
     <Compile Include="Interfaces\IFactoryDao.cs" />
     <Compile Include="Interfaces\IPointDao.cs" />
     <Compile Include="Interfaces\ITrafficDao.cs" />

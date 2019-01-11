@@ -13,9 +13,9 @@ namespace ActionService
     {
         IPointRepository pointRepo = RepositoryFactory.GetPointRepository;
 
-        public List<Point> GetListOfPoints(List<YearsRangeFilterItem> ageFilters)
+        public List<Point> GetListOfPoints(List<YearsRangeFilterItem> ageFilters , List<GenderFilterItem> genderFilters)
         {
-            return pointRepo.GetPoints(ageFilters);
+            return pointRepo.GetPoints(ageFilters,genderFilters);
         }
     }
 }

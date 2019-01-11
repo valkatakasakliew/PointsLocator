@@ -13,8 +13,6 @@ namespace DataObjects.DAOs
 
         public static ITrafficDao GetTrafficDao { get { return new TrafficDao(); } }
 
-        public static ICustomerTrafficDao GetCustomerTrafficDao { get { return new CustomerTrafficDao(); } }
-
         public static IPointDao GetPointDao { get { return new PointDao(); } }
     }
 }
