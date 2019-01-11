@@ -18,7 +18,7 @@ namespace InsertingData
             CreateObjectsInDB();
 
             //Inserting data to DB
-            InsertDataIntoCustomerAndTrafficTables(500, 100000);
+            InsertDataIntoCustomerAndTrafficTables(500, 10000);
 
         }
 
@@ -27,8 +27,8 @@ namespace InsertingData
         /// </summary>
         private static void CreateObjectsInDB()
         {
-            string sqlConnectionString = "Persist Security Info=False;Integrated Security=true;Initial Catalog=SMART_CITIES;server=.";
-            string path = Path.Combine(Environment.CurrentDirectory, @"StartScripts.sql");
+            string sqlConnectionString = @"Persist Security Info=False;Integrated Security=true;Initial Catalog=SMART_CITIES;server=.\SQLEXPRESS";
+            string path = Path.Combine(Environment.CurrentDirectory, @"CreatingSCripts.sql");
             string script = File.ReadAllText(path);
 
             SqlConnection conn = new SqlConnection(sqlConnectionString);

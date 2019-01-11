@@ -19,8 +19,6 @@ namespace DataObjects.DAOs
         public List<Point> GetPoints(List<YearsRangeFilterItem> ageFilters, List<GenderFilterItem> genderFilters)
         {
             string procedure = "GetPointData";
-            ageFilters = new List<YearsRangeFilterItem>() { new YearsRangeFilterItem("test",new AgeFilterObject(1,18),"test")};
-            genderFilters = new List<GenderFilterItem>();
             IEnumerable<AgeFilter> listAgeFilters = ageFilters.Select(x => new AgeFilter(x));
             IEnumerable<GFilter> listGenderFilters = genderFilters.Select(x => new GFilter(x));
 
@@ -34,7 +32,7 @@ namespace DataObjects.DAOs
 
             DataTable dtGender = new DataTable();
             dtGender.Columns.Add("Gender", typeof(string));
-            dtGender.Rows.Add(listGenderFilters);
+            listGenderFilters.ToList().ForEach(x=>dtGender.Rows.Add(x.Gender));
             SqlParameter gParameter = new SqlParameter("@GenderFilter", dtGender);
             gParameter.SqlDbType = SqlDbType.Structured;
             gParameter.TypeName = "GenderFilterType";

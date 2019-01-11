@@ -16,9 +16,20 @@ namespace Chalenge
     {
         List<YearsRangeFilterItem> _ageFilters;
         List<GenderFilterItem> _genderFilters;
+        const string AGE_FILTER_CACHE_KEY = "AGE_FILTER_CACHE_KEY";
+        const string GENDER_FILTER_CACHE_KEY = "GENDER_FILTER_CACHE_KEY";
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if(Cache[AGE_FILTER_CACHE_KEY] == null)
+                _ageFilters = new List<YearsRangeFilterItem>();
+            else
+                _ageFilters = Cache[AGE_FILTER_CACHE_KEY] as List<YearsRangeFilterItem>;
+            if (Cache[GENDER_FILTER_CACHE_KEY] == null)
+                _genderFilters = new List<GenderFilterItem>();
+            else
+                _genderFilters = Cache[GENDER_FILTER_CACHE_KEY] as List<GenderFilterItem>;
+
             if (!IsPostBack)
             {
                 BindData();
@@ -37,6 +48,9 @@ namespace Chalenge
             .ToList()
             .ForEach(x =>
                 _ageFilters.Add((YearsRangeFilterItem)filter.GetFilterItem(x.Value.ToString())));
+
+            Cache[AGE_FILTER_CACHE_KEY] = _ageFilters;
+
 
             BindData();
         }
@@ -62,6 +76,8 @@ namespace Chalenge
             .ToList()
             .ForEach(x =>
                 _genderFilters.Add((GenderFilterItem)filter.GetFilterItem(x.Value.ToString())));
+
+            Cache[GENDER_FILTER_CACHE_KEY] = _genderFilters;
 
             BindData();
         }

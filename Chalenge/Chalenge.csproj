@@ -99,6 +99,9 @@
     <Content Include="Content\images\marker-shadow.png" />
     <Content Include="Content\leaflet.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="CSS\bootstrap.css" />
+    <Content Include="CSS\Index.css" />
+    <Content Include="CSS\Normalize.css" />
     <Content Include="Global.asax" />
     <Content Include="Index.aspx" />
     <Content Include="Scripts\bootstrap.js" />
@@ -182,7 +185,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>58998</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:58998/</IISUrl>
+          <IISUrl>http://localhost:5812</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

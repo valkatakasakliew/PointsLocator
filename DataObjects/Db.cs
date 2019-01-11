@@ -46,6 +46,7 @@ namespace DataObjects
             {
                 using (var command = CreateStoredCommand(procedure, connection, parms))
                 {
+                    command.CommandTimeout = 2000;
                     using (var reader = command.ExecuteReader())
                     {
                         while (reader.Read())
@@ -112,7 +113,7 @@ namespace DataObjects
             command.Connection = conn;
             command.CommandType = CommandType.StoredProcedure;
             command.CommandText = procedure;
-            command.Parameters.Add(parms);
+            command.Parameters.AddRange(parms);
             return command;
         }
     }

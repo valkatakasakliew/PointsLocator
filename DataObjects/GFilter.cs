@@ -15,6 +15,6 @@ namespace DataObjects
             this.Gender = fo.Gender;
         }
 
-        string Gender { get; set; }
+       public string Gender { get; set; }
     }
 }
