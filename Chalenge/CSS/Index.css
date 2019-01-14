@@ -65,3 +65,9 @@ label::before {
     -o-transition: .25s all ease;
     transition: .25s all ease;
 }
+table.popUpTable,
+table.popUpTable tr,
+table.popUpTable td{
+    border:solid 1px #ccc;
+
+}

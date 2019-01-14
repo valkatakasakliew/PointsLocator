@@ -48,7 +48,7 @@ map.addLayer(markerClusters);
 var shownLayer, polygon;
 
 function generatePopUp(marker) {
-    return '<table><tr><th rowspan=3>Gender</th><th rowspan=6>Age</th></tr>' +
+    return '<table class="popUpTable"><tr><th colspan=3>Gender</th><th colspan=6>Age</th></tr>' +
         '<tr><td>M</td><td>F</td><td>?</td><td>1-18</td><td>19-25</td><td>26-35</td><td>36-45</td><td>46-65</td><td>65+</td>' +
         '</tr><tr>' +
         '<td>' + marker.SumM + '</td>' +
