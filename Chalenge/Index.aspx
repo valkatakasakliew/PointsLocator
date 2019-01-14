@@ -39,7 +39,8 @@
                             DataSourceID="odsGender"
                             OnSelectedIndexChanged="chbxListGenders_SelectedIndexChanged"
                             DataTextField="FilterText"
-                            DataValueField="FilterName">
+                            DataValueField="FilterName"
+                            AutoPostBack="true">
                         </asp:CheckBoxList>
                         <asp:ObjectDataSource runat="Server" ID="odsGender"
                             SelectMethod="GetFilterItems" TypeName="BusinessObjects.Filters.GenderFilter"></asp:ObjectDataSource>
@@ -52,7 +53,8 @@
                             DataSourceID="odsYearsRange"
                             OnSelectedIndexChanged="ChbxListAges_SelectedIndexChanged"
                             DataTextField="FilterText"
-                            DataValueField="FilterName">
+                            DataValueField="FilterName"
+                            AutoPostBack="true">
                         </asp:CheckBoxList>
                         <asp:ObjectDataSource runat="Server" ID="odsYearsRange"
                             SelectMethod="GetFilterItems" TypeName="BusinessObjects.Filters.YearsRangeFilter"></asp:ObjectDataSource>
